@@ -27,4 +27,14 @@ class Command extends SymfonyCommand
               ->setRows($phones)
               ->render();
     }
+
+    protected function emptyValidation($input)
+    {
+        $input->setValidator(function ($answer) {
+            if (!$answer) {
+                throw new \RuntimeException('This field can not be empty');
+            }
+            return $answer;
+        });
+    }
 }
